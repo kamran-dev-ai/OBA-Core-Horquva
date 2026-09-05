@@ -26,6 +26,17 @@ describe('WorkspaceDrawer', () => {
     fireEvent.click(screen.getByLabelText('Close drawer'));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  it('calls onClose when the Escape key is pressed', () => {
+    const onClose = vi.fn();
+    render(
+      <WorkspaceDrawer isOpen={true} onClose={onClose} title="Test Drawer">
+        <p>Drawer content</p>
+      </WorkspaceDrawer>
+    );
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe('WorkspaceModal', () => {
@@ -47,6 +58,17 @@ describe('WorkspaceModal', () => {
     );
     expect(screen.getByText('Modal content')).toBeInTheDocument();
     fireEvent.click(screen.getByLabelText('Close modal'));
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClose when the Escape key is pressed', () => {
+    const onClose = vi.fn();
+    render(
+      <WorkspaceModal isOpen={true} onClose={onClose} title="Test Modal">
+        <p>Modal content</p>
+      </WorkspaceModal>
+    );
+    fireEvent.keyDown(document, { key: 'Escape' });
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

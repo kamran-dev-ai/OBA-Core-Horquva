@@ -10,6 +10,8 @@ import WorkspaceTabs from './components/shell/WorkspaceTabs';
 import { WorkspaceStateProvider } from './context/WorkspaceStateContext';
 import { LayoutDashboard, Brain, Settings, CheckCircle2 } from 'lucide-react';
 import { NavigationItem } from './types/workspace.types';
+import NotFoundPage from './components/shell/NotFoundPage';
+import ErrorBoundary from './components/shell/ErrorBoundary';
 import {
   MetricWithTrend,
   LineChart,
@@ -160,7 +162,6 @@ const IntelligencePage: React.FC = () => (
     </div>
   </div>
 );
-
 const OperationsPage: React.FC = () => (
   <WorkspaceGrid columns={2} gap="md">
     <WidgetContainer id="graph-org" title="Organizational Intelligence" subtitle="Team nodes and operational links">
@@ -192,9 +193,10 @@ const ApprovalsPage: React.FC = () => (
 
 export const WorkspaceDashboard: React.FC = () => {
   return (
-    <WorkspaceStateProvider>
-      <BrowserRouter>
-        <ApplicationShell
+    <ErrorBoundary fallbackTitle="Executive Workspace encountered an error">
+      <WorkspaceStateProvider>
+        <BrowserRouter>
+          <ApplicationShell
           navigationItems={navigationItems}
           userName="Taha Zaidi"
           userRole="Executive Admin"
@@ -205,10 +207,12 @@ export const WorkspaceDashboard: React.FC = () => {
             <Route path="/intelligence/*" element={<IntelligencePage />} />
             <Route path="/operations" element={<OperationsPage />} />
             <Route path="/approvals" element={<ApprovalsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
-        </ApplicationShell>
+               </ApplicationShell>
       </BrowserRouter>
     </WorkspaceStateProvider>
+  </ErrorBoundary>
   );
 };
 
