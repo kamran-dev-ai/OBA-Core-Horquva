@@ -21,6 +21,7 @@ describe('ApplicationShell', () => {
     );
     expect(screen.getAllByText('Overview').length).toBeGreaterThan(0);
     expect(screen.getByText('Taha')).toBeInTheDocument();
+
   });
 
   it('collapses and expands the sidebar on toggle', () => {
@@ -35,6 +36,19 @@ describe('ApplicationShell', () => {
     expect(screen.getByText('WOBA')).toBeInTheDocument();
     fireEvent.click(toggle);
     expect(screen.queryByText('WOBA')).not.toBeInTheDocument();
+  });
+  it('keeps nav links accessible by name even when the sidebar is collapsed', () => {
+    render(
+      <MemoryRouter initialEntries={['/overview']}>
+        <ApplicationShell navigationItems={navItems} userName="Taha" userRole="Admin">
+          <div>Content</div>
+        </ApplicationShell>
+      </MemoryRouter>
+    );
+    const toggle = screen.getByTestId('sidebar-toggle');
+    fireEvent.click(toggle);
+    expect(screen.getByRole('link', { name: 'Overview' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Operations' })).toBeInTheDocument();
   });
 });
 

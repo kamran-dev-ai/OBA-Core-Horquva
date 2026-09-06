@@ -37,6 +37,33 @@ describe('WorkspaceDrawer', () => {
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  it('moves focus into the dialog on open and restores it on close', () => {
+    const onClose = vi.fn();
+    const { rerender } = render(
+      <div>
+        <button>Open trigger</button>
+        <WorkspaceDrawer isOpen={false} onClose={onClose} title="Test Drawer">
+          <p>Drawer content</p>
+        </WorkspaceDrawer>
+      </div>
+    );
+
+    const trigger = screen.getByText('Open trigger');
+    trigger.focus();
+    expect(document.activeElement).toBe(trigger);
+
+    rerender(
+      <div>
+        <button>Open trigger</button>
+        <WorkspaceDrawer isOpen={true} onClose={onClose} title="Test Drawer">
+          <p>Drawer content</p>
+        </WorkspaceDrawer>
+      </div>
+    );
+
+    expect(document.activeElement).toHaveAttribute('role', 'dialog');
+  });
 });
 
 describe('WorkspaceModal', () => {
@@ -70,6 +97,16 @@ describe('WorkspaceModal', () => {
     );
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('moves focus into the dialog on open', () => {
+    const onClose = vi.fn();
+    render(
+      <WorkspaceModal isOpen={true} onClose={onClose} title="Test Modal">
+        <p>Modal content</p>
+      </WorkspaceModal>
+    );
+    expect(document.activeElement).toHaveAttribute('role', 'dialog');
   });
 });
 

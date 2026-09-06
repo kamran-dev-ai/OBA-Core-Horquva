@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ApplicationShell from './components/shell/ApplicationShell';
 import WorkspaceGrid from './components/layout/WorkspaceGrid';
@@ -27,10 +27,10 @@ import type {
 } from '../../visualization/src';
 
 const navigationItems: NavigationItem[] = [
-  { id: 'overview', label: 'Overview', icon: <LayoutDashboard size={18} />, path: '/overview' },
-  { id: 'intelligence', label: 'Intelligence', icon: <Brain size={18} />, path: '/intelligence' },
-  { id: 'operations', label: 'Operations', icon: <Settings size={18} />, path: '/operations', badge: '3' },
-  { id: 'approvals', label: 'Approvals', icon: <CheckCircle2 size={18} />, path: '/approvals' },
+  { id: 'overview', label: 'Overview', icon: <LayoutDashboard size={24} strokeWidth={2} />, path: '/overview' },
+  { id: 'intelligence', label: 'Intelligence', icon: <Brain size={24} strokeWidth={2} />, path: '/intelligence' },
+  { id: 'operations', label: 'Operations', icon: <Settings size={24} strokeWidth={2} />, path: '/operations', badge: '3' },
+  { id: 'approvals', label: 'Approvals', icon: <CheckCircle2 size={24} strokeWidth={2} />, path: '/approvals' },
 ];
 
 const intelligenceTabs = [
@@ -86,14 +86,14 @@ const OverviewPage: React.FC = () => (
   <div>
     <WorkspaceSection title="Key Metrics" description="Live financial and operational snapshot">
       <WorkspaceGrid columns={4} gap="md">
-        <WidgetContainer id="revenue" title="Quarterly Velocity" subtitle="Real-time KPI trajectory">
+        <WidgetContainer id="revenue" title="Quarterly Velocity" subtitle="Real-time KPI trajectory" dataClassification="demo">
           <MetricWithTrend
             data={revenueMetric}
             accessibleLabel="Sprint completion rate at 94.2%"
           />
         </WidgetContainer>
 
-        <WidgetContainer id="headcount" title="Headcount" isLoading>
+        <WidgetContainer id="headcount" title="Headcount" isLoading dataClassification="demo">
           <div />
         </WidgetContainer>
 
@@ -101,11 +101,12 @@ const OverviewPage: React.FC = () => (
           id="pipeline"
           title="Pipeline"
           error="Failed to load pipeline data"
+          dataClassification="demo"
         >
           <div />
         </WidgetContainer>
 
-        <WidgetContainer id="activity-trend" title="System Activity Trend" subtitle="Throughput over the last 30 days">
+        <WidgetContainer id="activity-trend" title="System Activity Trend" subtitle="Throughput over the last 30 days" dataClassification="demo">
           <LineChart
             series={activitySeries}
             accessibleLabel="System activity line chart"
@@ -134,9 +135,10 @@ const OverviewPage: React.FC = () => (
     </WorkspaceSection>
   </div>
 );
+
 const InsightsTab: React.FC = () => (
   <WorkspaceGrid columns={2} gap="md">
-    <WidgetContainer id="ai-insights" title="AI Insights" subtitle="Latest analysis">
+    <WidgetContainer id="ai-insights" title="AI Insights" subtitle="Latest analysis" dataClassification="demo">
       <p className="text-sm text-slate-600">No insights generated yet.</p>
     </WidgetContainer>
   </WorkspaceGrid>
@@ -144,7 +146,7 @@ const InsightsTab: React.FC = () => (
 
 const ReportsTab: React.FC = () => (
   <WorkspaceGrid columns={2} gap="md">
-    <WidgetContainer id="ai-reports" title="Generated Reports" subtitle="Weekly digest">
+    <WidgetContainer id="ai-reports" title="Generated Reports" subtitle="Weekly digest" dataClassification="demo">
       <p className="text-sm text-slate-600">No reports generated yet.</p>
     </WidgetContainer>
   </WorkspaceGrid>
@@ -162,9 +164,10 @@ const IntelligencePage: React.FC = () => (
     </div>
   </div>
 );
+
 const OperationsPage: React.FC = () => (
   <WorkspaceGrid columns={2} gap="md">
-    <WidgetContainer id="graph-org" title="Organizational Intelligence" subtitle="Team nodes and operational links">
+    <WidgetContainer id="graph-org" title="Organizational Intelligence" subtitle="Team nodes and operational links" dataClassification="demo">
       <OrganizationalGraph
         nodes={orgNodes}
         edges={orgEdges}
@@ -173,7 +176,7 @@ const OperationsPage: React.FC = () => (
       />
     </WidgetContainer>
 
-    <WidgetContainer id="timeline-memory" title="Operational Timeline" subtitle="Chronological audit & execution log">
+    <WidgetContainer id="timeline-memory" title="Operational Timeline" subtitle="Chronological audit & execution log" dataClassification="demo">
       <MemoryTimeline
         events={timelineEvents}
         onEventSelect={(event) => console.log('Timeline event selected:', event)}
@@ -185,7 +188,7 @@ const OperationsPage: React.FC = () => (
 
 const ApprovalsPage: React.FC = () => (
   <WorkspaceGrid columns={1} gap="md">
-    <WidgetContainer id="pending-approvals" title="Pending Approvals">
+    <WidgetContainer id="pending-approvals" title="Pending Approvals" dataClassification="demo">
       <p className="text-sm text-slate-600">No pending approvals.</p>
     </WidgetContainer>
   </WorkspaceGrid>
@@ -197,22 +200,22 @@ export const WorkspaceDashboard: React.FC = () => {
       <WorkspaceStateProvider>
         <BrowserRouter>
           <ApplicationShell
-          navigationItems={navigationItems}
-          userName="Taha Zaidi"
-          userRole="Executive Admin"
-        >
-          <Routes>
-            <Route path="/" element={<Navigate to="/overview" replace />} />
-            <Route path="/overview" element={<OverviewPage />} />
-            <Route path="/intelligence/*" element={<IntelligencePage />} />
-            <Route path="/operations" element={<OperationsPage />} />
-            <Route path="/approvals" element={<ApprovalsPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-               </ApplicationShell>
-      </BrowserRouter>
-    </WorkspaceStateProvider>
-  </ErrorBoundary>
+            navigationItems={navigationItems}
+            userName="Taha Zaidi"
+            userRole="Executive Admin"
+          >
+            <Routes>
+              <Route path="/" element={<Navigate to="/overview" replace />} />
+              <Route path="/overview" element={<OverviewPage />} />
+              <Route path="/intelligence/*" element={<IntelligencePage />} />
+              <Route path="/operations" element={<OperationsPage />} />
+              <Route path="/approvals" element={<ApprovalsPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </ApplicationShell>
+        </BrowserRouter>
+      </WorkspaceStateProvider>
+    </ErrorBoundary>
   );
 };
 

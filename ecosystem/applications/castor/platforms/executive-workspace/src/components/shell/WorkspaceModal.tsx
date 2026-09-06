@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 
 interface WorkspaceModalProps {
   isOpen: boolean;
@@ -13,15 +13,45 @@ export const WorkspaceModal: React.FC<WorkspaceModalProps> = ({
   title,
   children,
 }) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedElement = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     if (!isOpen) return;
+
+    previouslyFocusedElement.current = document.activeElement as HTMLElement;
+    dialogRef.current?.focus();
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
+        return;
+      }
+
+      if (event.key === 'Tab' && dialogRef.current) {
+        const focusableElements = dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
+
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      previouslyFocusedElement.current?.focus();
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
@@ -34,9 +64,12 @@ export const WorkspaceModal: React.FC<WorkspaceModalProps> = ({
         aria-hidden="true"
       />
       <div
+        ref={dialogRef}
         role="dialog"
+        aria-modal="true"
         aria-label={title}
-        className="relative w-full max-w-lg bg-white rounded-xl shadow-xl"
+        tabIndex={-1}
+        className="relative w-full max-w-lg bg-white rounded-xl shadow-xl outline-none"
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200">
           <h2 className="text-sm font-semibold text-slate-800">{title}</h2>

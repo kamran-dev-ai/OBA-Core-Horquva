@@ -39,6 +39,8 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ items }) => {
             <Link
               key={item.id}
               to={item.path}
+              aria-label={item.label}
+              aria-current={isActive ? 'page' : undefined}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                 isActive
                   ? 'bg-slate-800 text-white'
@@ -46,7 +48,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ items }) => {
               }`}
             >
               {item.icon && <span aria-hidden="true">{item.icon}</span>}
-              {!collapsed && <span className="flex-1 text-left">{item.label}</span>}
+              {!collapsed && <span className="flex-1 text-left" aria-hidden="true">{item.label}</span>}
               {!collapsed && item.badge && (
                 <span className="text-xs bg-indigo-500 text-white px-1.5 py-0.5 rounded-full">
                   {item.badge}

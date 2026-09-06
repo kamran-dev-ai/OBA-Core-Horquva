@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+﻿import { ReactNode } from 'react';
 
 export interface NavigationItem {
   id: string;
@@ -8,6 +8,8 @@ export interface NavigationItem {
   badge?: string;
 }
 
+export type DataClassification = 'real' | 'demo' | 'test' | 'blocked';
+
 export interface WidgetContainerProps {
   id: string;
   title: string;
@@ -16,6 +18,7 @@ export interface WidgetContainerProps {
   error?: string;
   children: ReactNode;
   onRefresh?: () => void;
+  dataClassification?: DataClassification;
 }
 
 export interface WorkspaceGridProps {

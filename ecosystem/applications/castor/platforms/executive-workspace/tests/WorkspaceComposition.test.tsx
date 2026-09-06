@@ -76,4 +76,20 @@ describe('WorkspaceTabs', () => {
     const reportsTab = screen.getByText('Reports');
     expect(reportsTab.className).toContain('text-indigo-600');
   });
+  it('exposes correct tab roles and aria-selected state', () => {
+    render(
+      <MemoryRouter initialEntries={['/intelligence/insights']}>
+        <WorkspaceTabs
+          tabs={[
+            { label: 'Insights', path: '/intelligence/insights' },
+            { label: 'Reports', path: '/intelligence/reports' },
+          ]}
+        />
+      </MemoryRouter>
+    );
+    const insightsTab = screen.getByRole('tab', { name: 'Insights' });
+    const reportsTab = screen.getByRole('tab', { name: 'Reports' });
+    expect(insightsTab).toHaveAttribute('aria-selected', 'true');
+    expect(reportsTab).toHaveAttribute('aria-selected', 'false');
+  });  
 });

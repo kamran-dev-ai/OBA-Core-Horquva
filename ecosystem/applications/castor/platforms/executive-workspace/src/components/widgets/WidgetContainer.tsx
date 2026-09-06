@@ -1,5 +1,6 @@
 import React from 'react';
 import { WidgetContainerProps } from '../../types/workspace.types';
+import DataClassificationBadge from './DataClassificationBadge';
 
 export const WidgetContainer: React.FC<WidgetContainerProps> = ({
   id,
@@ -9,6 +10,7 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = ({
   error,
   children,
   onRefresh,
+  dataClassification,
 }) => {
   return (
     <div
@@ -17,7 +19,12 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = ({
     >
       <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100">
         <div>
-          <h3 className="text-sm font-semibold text-slate-800">{title}</h3>
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-slate-800">{title}</h3>
+            {dataClassification && (
+              <DataClassificationBadge classification={dataClassification} />
+            )}
+          </div>
           {subtitle && (
             <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>
           )}
@@ -40,7 +47,6 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = ({
           </button>
         </div>
       </div>
-
       <div className="flex-1 p-4 w-full h-full">
         {isLoading ? (
           <div className="animate-pulse space-y-3">

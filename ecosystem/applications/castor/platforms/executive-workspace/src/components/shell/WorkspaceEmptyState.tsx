@@ -14,7 +14,7 @@ export const WorkspaceEmptyState: React.FC<WorkspaceEmptyStateProps> = ({
   onAction,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center text-center py-10 px-4">
+    <div role="status" className="flex flex-col items-center justify-center text-center py-10 px-4">
       <div className="text-3xl mb-2" aria-hidden="true">📭</div>
       <h3 className="text-sm font-semibold text-slate-800">{title}</h3>
       {description && (
