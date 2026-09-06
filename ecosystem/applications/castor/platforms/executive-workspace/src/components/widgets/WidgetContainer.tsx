@@ -8,6 +8,8 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = ({
   subtitle,
   isLoading = false,
   error,
+  state,
+  onRetry,
   children,
   onRefresh,
   dataClassification,
@@ -62,8 +64,51 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = ({
             <span>⚠</span>
             <span>{error}</span>
           </div>
+        ) : state === 'unauthorized' ? (
+          <div
+            role="alert"
+            className="flex flex-col items-center justify-center text-center gap-2 py-6 text-sm text-slate-600"
+          >
+            <span aria-hidden="true">🔒</span>
+            <p>You don't have permission to view this data.</p>
+          </div>
+        ) : state === 'offline' ? (
+          <div
+            role="alert"
+            className="flex flex-col items-center justify-center text-center gap-2 py-6 text-sm text-slate-600"
+          >
+            <span aria-hidden="true">📡</span>
+            <p>Unable to reach the data source. Check your connection.</p>
+            {onRetry && (
+              <button
+                onClick={onRetry}
+                className="mt-1 text-xs font-medium text-indigo-600 hover:text-indigo-700 px-3 py-1.5 rounded-lg border border-indigo-200 hover:bg-indigo-50"
+              >
+                Retry
+              </button>
+            )}
+          </div>
         ) : (
-          <div className="w-full h-full">{children}</div>
+          <div className="w-full h-full">
+            {state === 'stale' && (
+              <div
+                role="status"
+                className="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-2 py-1 mb-3"
+              >
+                <span aria-hidden="true">🕓</span>
+                <span>This data may be out of date.</span>
+                {onRetry && (
+                  <button
+                    onClick={onRetry}
+                    className="ml-auto font-medium hover:underline"
+                  >
+                    Refresh
+                  </button>
+                )}
+              </div>
+            )}
+            {children}
+          </div>
         )}
       </div>
     </div>

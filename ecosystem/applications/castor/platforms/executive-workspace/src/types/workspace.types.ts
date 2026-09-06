@@ -10,12 +10,16 @@ export interface NavigationItem {
 
 export type DataClassification = 'real' | 'demo' | 'test' | 'blocked';
 
+export type WidgetState = 'unauthorized' | 'stale' | 'offline';
+
 export interface WidgetContainerProps {
   id: string;
   title: string;
   subtitle?: string;
   isLoading?: boolean;
   error?: string;
+  state?: WidgetState;
+  onRetry?: () => void;
   children: ReactNode;
   onRefresh?: () => void;
   dataClassification?: DataClassification;

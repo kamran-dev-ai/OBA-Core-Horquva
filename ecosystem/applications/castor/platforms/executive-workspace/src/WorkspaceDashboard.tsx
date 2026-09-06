@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useSearchParams } from 'react-router-dom';
 import ApplicationShell from './components/shell/ApplicationShell';
 import WorkspaceGrid from './components/layout/WorkspaceGrid';
 import WorkspaceSection from './components/layout/WorkspaceSection';
@@ -82,9 +82,37 @@ const timelineEvents: TimelineEvent[] = [
   },
 ];
 
-const OverviewPage: React.FC = () => (
-  <div>
-    <WorkspaceSection title="Key Metrics" description="Live financial and operational snapshot">
+const OverviewPage: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const range = searchParams.get('range') ?? '30d';
+
+  const rangeOptions = [
+    { value: '7d', label: '7 days' },
+    { value: '30d', label: '30 days' },
+    { value: '90d', label: '90 days' },
+  ];
+
+  return (
+    <div>
+      <div className="flex items-center justify-end gap-2 px-4 pt-4">
+        <label htmlFor="range-select" className="text-xs text-slate-500">
+          Time range:
+        </label>
+        <select
+          id="range-select"
+          value={range}
+          onChange={(event) => setSearchParams({ range: event.target.value })}
+          className="text-xs border border-slate-200 rounded-lg px-2 py-1 text-slate-700"
+        >
+          {rangeOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <WorkspaceSection title="Key Metrics" description={`Live financial and operational snapshot — last ${range}`}>
       <WorkspaceGrid columns={4} gap="md">
         <WidgetContainer id="revenue" title="Quarterly Velocity" subtitle="Real-time KPI trajectory" dataClassification="demo">
           <MetricWithTrend
@@ -132,9 +160,10 @@ const OverviewPage: React.FC = () => (
           </WorkspacePanel>
         }
       />
-    </WorkspaceSection>
-  </div>
-);
+      </WorkspaceSection>
+    </div>
+  );
+};
 
 const InsightsTab: React.FC = () => (
   <WorkspaceGrid columns={2} gap="md">
