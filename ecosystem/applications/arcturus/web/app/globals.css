@@ -79,4 +79,24 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(10px);
     border: 1px solid var(--card-border);
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ─── Global Scrollbar Removal ────────────────────────────── */
+html, body, div, main, aside, nav, section, ul {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE & Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none !important;     /* Chrome, Safari, Edge, Opera */
+  width: 0px !important;
+  height: 0px !important;
 }

@@ -59,7 +59,7 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 overflow-y-auto py-4">
+      <div className="flex-1 overflow-y-auto no-scrollbar py-4">
         {NAV_SECTIONS.map((section, idx) => (
           <div key={idx} className="mb-6 px-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-3 px-2">
