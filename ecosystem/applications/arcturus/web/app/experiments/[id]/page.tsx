@@ -38,7 +38,7 @@ export default function ExperimentDetailPage() {
           href={`/intelligence?experimentId=${experimentId}`}
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-sm transition-colors"
         >
-          🧠 View Gemini Strategic Assessment & Recommendations
+          🧠 View AI Strategic Assessment & Recommendations
         </Link>
         <Link 
           href={`/evidence?experimentId=${experimentId}`}

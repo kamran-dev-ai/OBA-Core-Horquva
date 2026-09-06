@@ -10,7 +10,7 @@ export default function SectionHeader({ title, description, action }: SectionHea
   return (
     <div className="flex items-center justify-between mb-6">
       <div>
-        <h2 className="text-xl font-bold font-heading text-slate-800 dark:text-slate-100">{title}</h2>
+        <h2 className="text-xl font-bold font-heading text-slate-900">{title}</h2>
         {description && <p className="text-sm text-slate-500 mt-1">{description}</p>}
       </div>
       {action && <div>{action}</div>}

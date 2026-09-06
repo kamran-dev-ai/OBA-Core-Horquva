@@ -83,7 +83,7 @@ function RuntimeContent() {
             id="rt-select"
             value={experimentId}
             onChange={(e) => setExperimentId(e.target.value)}
-            className="text-sm font-medium border border-slate-300 rounded-lg px-3 py-2 bg-white text-slate-900 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none max-w-xs"
+            className="text-sm font-semibold border border-slate-200 rounded-lg px-3 py-2 bg-slate-50 text-slate-800 shadow-sm focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none max-w-xs"
           >
             {experiments.map((exp) => (
               <option key={exp.id} value={exp.id}>
@@ -95,25 +95,25 @@ function RuntimeContent() {
       </div>
 
       {/* Execution Control Strip */}
-      <div className="bg-slate-900 text-white p-6 rounded-xl shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex flex-wrap items-center gap-4">
           <div>
-            <span className="text-xs text-slate-400 font-semibold uppercase block">Ticks to Execute</span>
+            <span className="text-xs text-slate-500 font-semibold uppercase block">Ticks to Execute</span>
             <input
               type="number"
               min="5"
               max="500"
               value={durationTicks}
               onChange={(e) => setDurationTicks(Number(e.target.value))}
-              className="mt-1 w-24 bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="mt-1 w-28 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-sm text-slate-900 font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <span className="text-xs text-slate-400 font-semibold uppercase block">Tick Speed</span>
+            <span className="text-xs text-slate-500 font-semibold uppercase block">Tick Speed</span>
             <select
               value={tickSpeed}
               onChange={(e) => setTickSpeed(Number(e.target.value))}
-              className="mt-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="mt-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-sm text-slate-900 font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value={0.05}>Fast (50ms)</option>
               <option value={0.1}>Normal (100ms)</option>
@@ -123,22 +123,22 @@ function RuntimeContent() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <button
             onClick={handleStartSimulation}
-            className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold rounded-lg shadow transition-all flex items-center gap-2"
+            className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-all flex items-center gap-2"
           >
             <span>▶</span> Run Simulation
           </button>
           <button
             onClick={handlePauseSimulation}
-            className="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold rounded-lg border border-slate-700 transition"
+            className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-lg border border-slate-200 transition-colors"
           >
             ⏸ Pause
           </button>
           <button
             onClick={handleResumeSimulation}
-            className="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold rounded-lg border border-slate-700 transition"
+            className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-lg border border-slate-200 transition-colors"
           >
             ⏯ Resume
           </button>
@@ -179,7 +179,7 @@ function RuntimeContent() {
           <h2 className="text-base font-bold text-slate-900">Live AI Reasoning Stream</h2>
           <div className="space-y-2">
             {liveInsights.map((ins, idx) => (
-              <div key={idx} className="p-3 bg-slate-50 border border-slate-100 rounded-lg text-sm text-slate-700">
+              <div key={idx} className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700">
                 <span className="font-semibold text-indigo-600 mr-2">[{ins.type?.toUpperCase() || 'INSIGHT'}]</span>
                 {ins.content}
               </div>
@@ -192,13 +192,13 @@ function RuntimeContent() {
       <div className="flex justify-end gap-3 pt-2">
         <Link
           href={`/intelligence?experimentId=${experimentId}`}
-          className="px-4 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-lg hover:bg-slate-50 shadow-sm"
+          className="px-4 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 shadow-sm transition-colors"
         >
-          🧠 Open Gemini Assessment &rarr;
+          🧠 Open AI Assessment &rarr;
         </Link>
         <Link
           href={`/evidence?experimentId=${experimentId}`}
-          className="px-4 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-lg hover:bg-slate-50 shadow-sm"
+          className="px-4 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 shadow-sm transition-colors"
         >
           📋 Open Synthetic Evidence &rarr;
         </Link>

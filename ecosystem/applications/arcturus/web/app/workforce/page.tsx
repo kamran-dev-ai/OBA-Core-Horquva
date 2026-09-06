@@ -71,7 +71,7 @@ export default function WorkforcePage() {
       </div>
 
       <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden shadow-sm">
-        <div className="p-4 border-b border-[var(--card-border)] bg-slate-50 dark:bg-slate-800/50 font-semibold text-sm text-slate-700">
+        <div className="p-4 border-b border-[var(--card-border)] bg-slate-50 font-semibold text-sm text-slate-800">
           Active Workforce Registry
         </div>
         <div className="divide-y divide-[var(--card-border)]">

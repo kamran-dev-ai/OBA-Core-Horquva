@@ -7,13 +7,13 @@ export default function KpiCard({ metric }: { metric: KpiMetric }) {
   const isDown = metric.trendDirection === "down";
   
   return (
-    <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-5 shadow-sm">
+    <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:border-slate-300 transition-colors">
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-sm font-medium text-slate-500">{metric.label}</h3>
-        <span className={`flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full ${
-          metric.status === 'success' ? 'bg-[var(--status-success-bg)] text-[var(--status-success)]' :
-          metric.status === 'danger' ? 'bg-[var(--status-danger-bg)] text-[var(--status-danger)]' :
-          'bg-[var(--status-info-bg)] text-[var(--status-info)]'
+        <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{metric.label}</h3>
+        <span className={`flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full ${
+          metric.status === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
+          metric.status === 'danger' ? 'bg-rose-50 text-rose-700 border border-rose-200' :
+          'bg-indigo-50 text-indigo-700 border border-indigo-200'
         }`}>
           {isUp && <TrendingUp className="w-3 h-3" />}
           {isDown && <TrendingDown className="w-3 h-3" />}
@@ -22,14 +22,14 @@ export default function KpiCard({ metric }: { metric: KpiMetric }) {
         </span>
       </div>
       
-      <div className="flex items-end justify-between">
-        <div className="text-3xl font-bold font-heading text-slate-800 dark:text-slate-100">
+      <div className="flex items-end justify-between mt-3">
+        <div className="text-3xl font-bold font-heading text-slate-900">
           {metric.value}
         </div>
         <div className="w-24">
           <Sparkline 
             data={metric.sparkline} 
-            color={metric.status === 'success' ? 'var(--status-success)' : metric.status === 'danger' ? 'var(--status-danger)' : 'var(--brand-primary)'} 
+            color={metric.status === 'success' ? '#10b981' : metric.status === 'danger' ? '#ef4444' : '#4f46e5'} 
           />
         </div>
       </div>

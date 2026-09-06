@@ -23,7 +23,7 @@ export default function SyntheticDataPage() {
       />
 
       <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden shadow-sm">
-        <div className="p-4 border-b border-[var(--card-border)] bg-slate-50 dark:bg-slate-800/50 font-semibold text-sm text-slate-700 flex justify-between">
+        <div className="p-4 border-b border-[var(--card-border)] bg-slate-50 font-semibold text-sm text-slate-800 flex justify-between">
           <span>Generated Artifacts</span>
           <span className="text-xs text-slate-500 font-normal">3 artifacts stored in DB</span>
         </div>
