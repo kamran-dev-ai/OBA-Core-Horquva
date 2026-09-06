@@ -86,7 +86,7 @@ function IntelligenceContent() {
         <div>
           <p className="text-xs font-bold uppercase tracking-wider text-indigo-600">Arcturus AI Strategic Reasoning</p>
           <h1 className="mt-1 text-2xl font-bold text-slate-900">Simulation Intelligence & Assessment</h1>
-          <p className="mt-1 text-sm text-slate-600">Gemini LLM post-simulation strategic assessment, risk evaluation, and evidence citations.</p>
+          <p className="mt-1 text-sm text-slate-600">AI post-simulation strategic assessment, risk evaluation, and evidence citations.</p>
         </div>
 
         {/* Interactive Experiment Dropdown */}
@@ -113,7 +113,7 @@ function IntelligenceContent() {
       {loading && (
         <div className="p-12 text-center bg-white rounded-xl border border-slate-200">
           <div className="animate-spin w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-sm font-medium text-slate-600">Analyzing simulation evidence with Gemini AI...</p>
+          <p className="text-sm font-medium text-slate-600">Analyzing simulation evidence with AI...</p>
         </div>
       )}
 
@@ -138,7 +138,7 @@ function IntelligenceContent() {
             </h3>
             <p className="text-sm text-slate-500 max-w-md mx-auto mt-1">
               {assessmentStatus === 'UNAVAILABLE'
-                ? 'Gemini API key is unconfigured or rate limited. Verify GEMINI_API_KEY in ecosystem/applications/arcturus/.env.'
+                ? 'AI API key is unconfigured or rate limited. Verify API key in ecosystem/applications/arcturus/.env.'
                 : 'Strategic AI evaluations are compiled once a simulation finishes and validates its synthetic evidence corpus.'}
             </p>
           </div>

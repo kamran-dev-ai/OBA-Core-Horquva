@@ -50,7 +50,7 @@ export default function IntelligenceInsightsPanel() {
       {liveInsights && liveInsights.length > 0 && (
         <div className="flex items-center gap-1.5 text-[11px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-100 px-2.5 py-1 rounded-lg">
           <Sparkles className="w-3.5 h-3.5 animate-pulse text-indigo-600" />
-          <span>Live Gemini Intelligence Active</span>
+          <span>Live AI Intelligence Active</span>
         </div>
       )}
       {combinedInsights.map(insight => (

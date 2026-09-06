@@ -194,7 +194,7 @@ function RuntimeContent() {
           href={`/intelligence?experimentId=${experimentId}`}
           className="px-4 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 shadow-sm transition-colors"
         >
-          🧠 Open Gemini Assessment &rarr;
+          🧠 Open AI Assessment &rarr;
         </Link>
         <Link
           href={`/evidence?experimentId=${experimentId}`}
